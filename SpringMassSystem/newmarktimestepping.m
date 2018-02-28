@@ -15,6 +15,10 @@ for ii = 1:size(pbdof,1)
     AM(:,pbdof(ii,2)) = 0;
     AM(pbdof(ii,2),pbdof(ii,1)) = -1;
     AM(pbdof(ii,2),pbdof(ii,2)) = +1;
+    
+%     AM(pbdof(ii,2),pbdof(ii,1)) = -1;
+%     AM(pbdof(ii,2),pbdof(ii,2)) = -1;
+    
 end
 end
 
@@ -32,7 +36,9 @@ for s = 1:length(t)-1
     end
     end
     iF(s+1) = ForceVec(dofpernode*forceLoc(1)-1);
-    
+ 
+    %% Newmark Method
+   
     %%%%%%%%%%%%%%%
     % Accleration ;
     %%%%%%%%%%%%%%%

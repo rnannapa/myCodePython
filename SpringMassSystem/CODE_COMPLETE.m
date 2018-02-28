@@ -12,15 +12,15 @@ NX = str2double(NumCells); % Number of Cells along X axis
 
 if strcmpi(shape,'hexagon') ==1
     d = LX/(2*NX*cos(alpha)); % Length of Unit Cell
-    %NY = LY/(d*(2+2*sin(alpha))); % Number of Cells along Y axis
+    NY = LY/(d*(2+2*sin(alpha))); % Number of Cells along Y axis
 end
 if strcmpi(shape,'triangle') == 1
     d = LX/NX;
-    %NY = LY/(d*sin(alpha));
+    NY = LY/(d*sin(alpha));
 end
 
 
-NY = 3;
+%NY = 1; % Gives (2n+1) nodes on Y axis
 dofpernode = 2;
 nx = 0:NX; % NOT THE UNIT CELLS IN X DIRECTION
 ny = 0:NY; % NOT THE UNIT CELLS IN Y DIRECTION
@@ -30,7 +30,7 @@ BC = input('Are Boundary conditions Periodic (Yes/No):','s');
 %%%%%%%;
 % Time ;
 %%%%%%%;
-t_start = 0; t_end = 180; dt = 1;
+t_start = 0; t_end = 300; dt = 1;
 if (t_end - t_start)<dt
     dt = (t_end - t_start);
 end
@@ -95,7 +95,7 @@ dEnergy = sparse(length(t)-1,1);
 % Stiffness & Mass Matrices ;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic
-K = global_stiffness_matrix(Nodes,NODE_CONN,dofpernode,100,10); %det(K) ;
+K = global_stiffness_matrix(Nodes,NODE_CONN,dofpernode,1,0); %det(K) ;
 K(bdof,:) = 0;
 M = sparse(eye(size(tdof,1)));
 toc
@@ -114,9 +114,9 @@ pbdof = [pbdof_Bottom,pbdof_Top];
 % Time Stepping Scheme ;
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Central Difference
-%   beta = 0; gamma = 1/2;
+%    beta = 0; gamma = 1/2;
 % Average Accleration
-    beta = 1/4; gamma = 1/2;
+   beta = 1/4; gamma = 1/2;
 % Linear Accleration
 %   beta = 1/6; gamma = 1/2;
 
@@ -148,7 +148,7 @@ for i = 2:length(t)
 %     view([1,0,0])
 %     view(3)
     hold on
-    zlim([-0.2 0.2])
+    zlim([-1 1])
     grid on
     hold off
     pause(0.05)
