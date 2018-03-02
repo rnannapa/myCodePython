@@ -20,7 +20,7 @@ if strcmpi(shape,'triangle') == 1
 end
 
 
-NY = 10; % Gives (2n+1) nodes on Y axis
+NY = 2; % Gives (2n+1) nodes on Y axis
 dofpernode = 2;
 nx = 0:NX; % NOT THE UNIT CELLS IN X DIRECTION
 ny = 0:NY; % NOT THE UNIT CELLS IN Y DIRECTION
@@ -31,7 +31,7 @@ BC = input('Are Boundary conditions Periodic (Yes/No):','s');
 %%%%%%%;
 % Time ;
 %%%%%%%;
-t_start = 0; t_end = 300; dt = 10;
+t_start = 0; t_end = 300; dt = 1;
 if (t_end - t_start)<dt
     dt = (t_end - t_start);
 end
@@ -121,8 +121,8 @@ pbdof = [pbdof_Bottom,pbdof_Top];
 % Central Difference
 %    beta = 0; gamma = 1/2;
 % Average Accleration
-%    gamma = 1/2; beta = 1/4;
-gamma = 0.6; beta = 2*gamma;
+gamma = 1/2; beta = 1/4;
+%  gamma = 0.6; beta = 0.5;
 % Linear Accleration
 %   beta = 1/6; gamma = 1/2;
 
