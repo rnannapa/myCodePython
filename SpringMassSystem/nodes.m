@@ -23,7 +23,6 @@ base_cell = coord(alpha,d,shape);
 %%%%%%%%%%%
 % Hexagon ;
 %%%%%%%%%%%
-tic
 if strcmpi(shape,'hexagon') == 1
     for p = 1:length(nx)-1
         xSweep = base_cell + [nx(p)*2*d*cos(alpha),0];
@@ -96,4 +95,3 @@ Nodes = sortrows(Nodes,2);
 Nodes = round(Nodes,5);
 plot(Nodes(:,1),Nodes(:,2),'o')
 axis('equal')
-toc

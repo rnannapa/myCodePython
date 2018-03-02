@@ -1,6 +1,6 @@
 clear all; close all; clc;
 commandwindow
-tic
+
 alpha = input('Angle in radians:','s');
 alpha = str2num(alpha);
 % alpha = pi/2;
@@ -20,17 +20,18 @@ if strcmpi(shape,'triangle') == 1
 end
 
 
-%NY = 1; % Gives (2n+1) nodes on Y axis
+NY = 10; % Gives (2n+1) nodes on Y axis
 dofpernode = 2;
 nx = 0:NX; % NOT THE UNIT CELLS IN X DIRECTION
 ny = 0:NY; % NOT THE UNIT CELLS IN Y DIRECTION
 tol = 1e-5; % Tolerance
 
 BC = input('Are Boundary conditions Periodic (Yes/No):','s');
+
 %%%%%%%;
 % Time ;
 %%%%%%%;
-t_start = 0; t_end = 300; dt = 1;
+t_start = 0; t_end = 300; dt = 10;
 if (t_end - t_start)<dt
     dt = (t_end - t_start);
 end
@@ -38,9 +39,13 @@ t = t_start:dt:t_end;
 t(length(t)+1) = t_end;
 t_max = 60;w = 0.5;dw = 0.05;
 
+tic
 Nodes = nodes(alpha,d,nx,ny,shape,BC);
+toc
 
+tic
 NODE_CONN = node_conn(alpha,d,Nodes,shape,tol);
+toc
 
 dof = [1:dofpernode:dofpernode*size(Nodes,1)-1;
     2:dofpernode:dofpernode*size(Nodes,1)];
@@ -116,7 +121,8 @@ pbdof = [pbdof_Bottom,pbdof_Top];
 % Central Difference
 %    beta = 0; gamma = 1/2;
 % Average Accleration
-   beta = 1/4; gamma = 1/2;
+%    gamma = 1/2; beta = 1/4;
+gamma = 0.6; beta = 2*gamma;
 % Linear Accleration
 %   beta = 1/6; gamma = 1/2;
 
@@ -138,6 +144,10 @@ Y_dis = D(2:2:end,:);
 
 testidbottomnodes = find(Nodes(:,2) == min(Nodes(:,2)));
 testidtopnodes = find(Nodes(:,2) == max(Nodes(:,2)));
+figure
+hold on
+plot(t,X_dis(testidbottomnodes(1),:),'r-')
+plot(t,X_dis(testidtopnodes(1),:),'bo')
 % D(testidbottomnodes,:)
 % D(testidtopnodes,:)
 
