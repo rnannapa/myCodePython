@@ -31,7 +31,7 @@ BC = input('Are Boundary conditions Periodic (Yes/No):','s');
 %%%%%%%;
 % Time ;
 %%%%%%%;
-t_start = 0; t_end = 300; dt = 1;
+t_start = 0; t_end = 300; dt = 2;
 if (t_end - t_start)<dt
     dt = (t_end - t_start);
 end
@@ -121,8 +121,8 @@ pbdof = [pbdof_Bottom,pbdof_Top];
 % Central Difference
 %    beta = 0; gamma = 1/2;
 % Average Accleration
-gamma = 1/2; beta = 1/4;
-%  gamma = 0.6; beta = 0.5;
+% gamma = 1/2; beta = 1/4;
+gamma = 0.6; beta = 0.5*gamma;
 % Linear Accleration
 %   beta = 1/6; gamma = 1/2;
 
@@ -146,6 +146,7 @@ testidbottomnodes = find(Nodes(:,2) == min(Nodes(:,2)));
 testidtopnodes = find(Nodes(:,2) == max(Nodes(:,2)));
 figure
 hold on
+
 plot(t,X_dis(testidbottomnodes(1),:),'r-')
 plot(t,X_dis(testidtopnodes(1),:),'bo')
 % D(testidbottomnodes,:)
