@@ -1,5 +1,5 @@
 import time
-from numba import jit,autojit
+# from numba import jit,autojit
 from pdb import set_trace as bp
 from math import *
 import numpy as np

@@ -1,4 +1,4 @@
-from numba import jit,autojit
+# from numba import jit,autojit
 from pdb import set_trace as bp
 from math import *
 import numpy as np
@@ -21,6 +21,7 @@ def allCoordinates(alpha,d,nx,ny,shape,BC,plot):
 	ny = np.arange(1,30)
 	bp() # Break point for debugging
 	"""
+	bp()
 	unitcell = cellNodes(alpha,d,shape)
 	xDirection = unitcell
 	if shape == "HEXAGON":

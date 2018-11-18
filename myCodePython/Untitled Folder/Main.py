@@ -1,7 +1,7 @@
 # import cProfile
 # cProfile.run('')
 import time
-from numba import jit,autojit
+# from numba import jit,autojit
 from pdb import set_trace as bp
 from math import *
 import numpy as np
@@ -68,20 +68,20 @@ print allCoordinates
 print "Time required for generating allCoordinates:",time.time() - tCoordinates
 
 
-tConnectivity = time.time()
-Connectivity = Connectivity(allCoordinates,angle,d,shape,eps,plot)
-print Connectivity
-print "Time required for generating Connectivity:",time.time() - tCoordinates
+# tConnectivity = time.time()
+# Connectivity = Connectivity(allCoordinates,angle,d,shape,eps,plot)
+# print Connectivity
+# print "Time required for generating Connectivity:",time.time() - tCoordinates
 
-plt.show()
+# plt.show()
 # bp()
-# #######;
-# # Time ;
-# #######;
-tStart = 0; tEnd = 300; dt = 1;
-if (tEnd - tStart)<dt:
-    dt = (tEnd - tStart)
-t = np.arange(tStart,tEnd,dt)
-lenth =t[len(t)-1]
+# # #######;
+# # # Time ;
+# # #######;
+# tStart = 0; tEnd = 300; dt = 1;
+# if (tEnd - tStart)<dt:
+#     dt = (tEnd - tStart)
+# t = np.arange(tStart,tEnd,dt)
+# lenth =t[len(t)-1]
 
-tMax = 60; w = 0.5; dw = 0.05
+# tMax = 60; w = 0.5; dw = 0.05
